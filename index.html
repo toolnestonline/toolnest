@@ -3,594 +3,564 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolNest - Your Ultimate Online Tool Collection</title>
+    <title>Tool Nest - Your Ultimate Online Toolkit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
         body {
+            font-family: 'Poppins', sans-serif;
             background-color: #1E1E2F;
             color: #EAEAEA;
-            line-height: 1.6;
         }
-
-        body.light-mode {
-            background-color: #f5f5f7;
-            color: #333;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: #2B2D42;
-            padding: 1rem 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        body.light-mode header {
-            background-color: #3a4a6b;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-placeholder {
-            width: 50px;
-            height: 50px;
-            background-color: #FFD700;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #1E1E2F;
-        }
-
-        body.light-mode .logo-placeholder {
-            background-color: #3a4a6b;
-            color: #FFD700;
-        }
-
-        .header-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        h1 {
-            color: #FFD700;
-            font-size: 2.2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        body.light-mode h1 {
-            color: #FFD700;
-        }
-
-        .tagline {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        body.light-mode .tagline {
-            color: #EAEAEA;
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            background-color: rgba(255, 215, 0, 0.1);
-            border: 1px solid #FFD700;
-            color: #FFD700;
-        }
-
-        body.light-mode .theme-toggle {
-            background-color: rgba(58, 74, 107, 0.2);
-            border: 1px solid #3a4a6b;
-            color: #3a4a6b;
-        }
-
-        .theme-toggle i {
-            font-size: 1.2rem;
-        }
-
-        /* Main Content Styles */
-        main {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .category {
-            margin-bottom: 3rem;
-        }
-
-        .category-title {
-            color: #FFD700;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #3A3D5B;
-            display: flex;
-            align-items: center;
-        }
-
-        body.light-mode .category-title {
-            color: #3a4a6b;
-            border-bottom-color: #d1d1d6;
-        }
-
-        .category-title span {
-            margin-right: 10px;
-            font-size: 1.5rem;
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        /* Tool Card Styles */
+        
         .tool-card {
             background-color: #3A3D5B;
-            border-radius: 8px;
-            padding: 1.5rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 4px 6px rgba(255, 215, 0, 0.2);
         }
-
-        body.light-mode .tool-card {
-            background-color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e5e5ea;
-        }
-
+        
         .tool-card:hover {
             background-color: #FFD700;
+            color: #1E1E2F;
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 15px rgba(255, 215, 0, 0.3);
         }
-
-        body.light-mode .tool-card:hover {
-            background-color: #FFD700;
-        }
-
-        .tool-card:hover h2,
-        .tool-card:hover p {
+        
+        .tool-card:hover .tool-icon {
             color: #1E1E2F;
         }
-
-        .tool-card h2 {
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: #EAEAEA;
-            transition: color 0.3s ease;
-        }
-
-        body.light-mode .tool-card h2 {
-            color: #333;
-        }
-
-        .tool-card p {
-            font-size: 0.95rem;
-            margin-bottom: 1.2rem;
-            color: #D3D3D3;
-            transition: color 0.3s ease;
-        }
-
-        body.light-mode .tool-card p {
-            color: #666;
-        }
-
-        .tool-btn {
+        
+        .btn-gold {
             background-color: #FFD700;
             color: #1E1E2F;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
         }
-
-        body.light-mode .tool-btn {
-            background-color: #3a4a6b;
-            color: #fff;
-        }
-
-        .tool-btn:hover {
+        
+        .btn-gold:hover {
             background-color: #E6C200;
-            transform: scale(1.05);
         }
-
-        body.light-mode .tool-btn:hover {
-            background-color: #2b3a5b;
-        }
-
-        /* Footer Styles */
-        footer {
+        
+        .header-bg {
             background-color: #2B2D42;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
-        body.light-mode footer {
-            background-color: #3a4a6b;
+        
+        .search-box {
+            background-color: #3A3D5B;
+            border: 1px solid #FFD700;
         }
-
-        .footer-text {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        
+        .category-btn {
+            background-color: #3A3D5B;
+            transition: all 0.3s ease;
         }
-
-        body.light-mode .footer-text {
-            color: #EAEAEA;
+        
+        .category-btn:hover, .category-btn.active {
+            background-color: #FFD700;
+            color: #1E1E2F;
         }
-
-        /* Responsive Design */
+        
+        .tool-icon {
+            color: #FFD700;
+            transition: all 0.3s ease;
+        }
+        
+        .hidden-category {
+            display: none;
+        }
+        
         @media (max-width: 768px) {
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .category-title {
-                font-size: 1.5rem;
-            }
-
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-                padding: 1rem;
-            }
-
-            .theme-toggle {
-                align-self: flex-end;
-            }
-        }
-
-        @media (max-width: 480px) {
-            main {
-                padding: 1rem;
-            }
-
-            .tool-card {
-                padding: 1.2rem;
-            }
-
-            .logo-placeholder {
-                width: 40px;
-                height: 40px;
-                font-size: 0.8rem;
+            .tool-grid {
+                grid-template-columns: repeat(1, 1fr) !important;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="logo-placeholder">LOGO</div>
-            <div class="header-text">
-                <h1>ToolNest</h1>
-                <p class="tagline">Your ultimate collection of online tools for all needs</p>
+    <header class="header-bg py-6 sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="fas fa-tools text-3xl mr-3 text-gold-500 tool-icon"></i>
+                    <h1 class="text-3xl font-bold text-gold-500">Tool <span class="text-white">Nest</span></h1>
+                </div>
+                <div class="relative w-full md:w-1/3">
+                    <input type="text" placeholder="Search tools..." class="w-full py-2 px-4 rounded-full search-box text-white focus:outline-none focus:ring-2 focus:ring-gold-500" id="searchInput">
+                    <button class="absolute right-3 top-2 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="theme-toggle" id="themeToggle">
-            <i class="fas fa-sun"></i>
-            <span>Light Mode</span>
         </div>
     </header>
 
-    <main>
-        <!-- PDF & Document Tools -->
-        <section class="category">
-            <h2 class="category-title"><span>📄</span> PDF & Document Tools</h2>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <h2>PDF to Word</h2>
-                    <p>Convert your PDF files to editable Word documents with perfect formatting.</p>
-                    <button class="tool-btn" onclick="redirectToTool('PDF to Word')">Use Tool</button>
+    <main class="container mx-auto px-4 py-8">
+        <section class="mb-12">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold mb-4">Your Ultimate Online Toolkit</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Access hundreds of free tools for text manipulation, file conversion, calculations, and more - all in one place!</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-2 mb-8" id="categoryButtons">
+                <button class="category-btn px-4 py-2 rounded-full active" data-category="all">All Tools</button>
+                <button class="category-btn px-4 py-2 rounded-full" data-category="text">Text Tools</button>
+                <button class="category-btn px-4 py-2 rounded-full" data-category="file">File Tools</button>
+                <button class="category-btn px-4 py-2 rounded-full" data-category="math">Math Tools</button>
+                <button class="category-btn px-4 py-2 rounded-full" data-category="date">Date & Time</button>
+                <button class="category-btn px-4 py-2 rounded-full" data-category="image">Image Tools</button>
+                <button class="category-btn px-4 py-2 rounded-full" data-category="design">Design Tools</button>
+                <button class="category-btn px-4 py-2 rounded-full" data-category="converter">Converters</button>
+                <button class="category-btn px-4 py-2 rounded-full" data-category="developer">Developer Tools</button>
+                <button class="category-btn px-4 py-2 rounded-full" data-category="security">Security Tools</button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 tool-grid" id="toolsContainer">
+                <!-- Text Tools -->
+                <div class="tool-card p-6 rounded-lg" data-categories="text">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-font text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Word Counter</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Count words, characters, sentences, and paragraphs in your text.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Word Counter')">Use Tool</button>
                 </div>
-                <div class="tool-card">
-                    <h2>Word to PDF</h2>
-                    <p>Transform your Word documents into professional PDF files instantly.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Word to PDF')">Use Tool</button>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="text">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-text-height text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Case Converter</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Convert text between uppercase, lowercase, title case, and more.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Case Converter')">Use Tool</button>
                 </div>
-                <div class="tool-card">
-                    <h2>Merge PDFs</h2>
-                    <p>Combine multiple PDF files into a single document in just a few clicks.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Merge PDFs')">Use Tool</button>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="text">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-eraser text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Remove Duplicates</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Remove duplicate lines or words from your text.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Remove Duplicates')">Use Tool</button>
                 </div>
-                <div class="tool-card">
-                    <h2>Split PDF</h2>
-                    <p>Divide a PDF into multiple files by pages or extract specific pages.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Split PDF')">Use Tool</button>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="text">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-search text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Find & Replace</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Find and replace text within your content.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Find & Replace')">Use Tool</button>
                 </div>
-                <div class="tool-card">
-                    <h2>Compress PDF</h2>
-                    <p>Reduce PDF file size without significant quality loss.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Compress PDF')">Use Tool</button>
+                
+                <!-- File Tools -->
+                <div class="tool-card p-6 rounded-lg" data-categories="file">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-file-alt text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">TXT File Viewer</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">View and analyze text files directly in your browser.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('TXT File Viewer')">Use Tool</button>
                 </div>
-                <div class="tool-card">
-                    <h2>Unlock PDF</h2>
-                    <p>Remove password protection from PDF files securely.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Unlock PDF')">Use Tool</button>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="file">
+                    <div class="flex items-center mb-4">
+                        <i class="fab fa-markdown text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Markdown Viewer</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Preview Markdown formatted text as HTML.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Markdown Viewer')">Use Tool</button>
                 </div>
-                <div class="tool-card">
-                    <h2>PDF to JPG</h2>
-                    <p>Convert PDF pages to high-quality JPG images.</p>
-                    <button class="tool-btn" onclick="redirectToTool('PDF to JPG')">Use Tool</button>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="file">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-file-upload text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">File Size Checker</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Check the size of files with drag and drop functionality.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('File Size Checker')">Use Tool</button>
                 </div>
-                <div class="tool-card">
-                    <h2>JPG to PDF</h2>
-                    <p>Combine multiple JPG images into a single PDF document.</p>
-                    <button class="tool-btn" onclick="redirectToTool('JPG to PDF')">Use Tool</button>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="file">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-code text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">JSON Formatter</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Format and validate JSON data for better readability.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('JSON Formatter')">Use Tool</button>
+                </div>
+                
+                <!-- Math Tools -->
+                <div class="tool-card p-6 rounded-lg" data-categories="math">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-calculator text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Scientific Calculator</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Perform advanced mathematical calculations.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Scientific Calculator')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="math">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-user text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Age Calculator</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Calculate age based on birth date.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Age Calculator')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="math">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-percent text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Percentage Calculator</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Calculate percentages, increases, and decreases.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Percentage Calculator')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="math">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-weight text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">BMI Calculator</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Calculate your Body Mass Index.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('BMI Calculator')">Use Tool</button>
+                </div>
+                
+                <!-- Date & Time Tools -->
+                <div class="tool-card p-6 rounded-lg" data-categories="date">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-clock text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Countdown Timer</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Set a countdown timer for any duration.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Countdown Timer')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="date">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-stopwatch text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Stopwatch</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Measure elapsed time with precision.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Stopwatch')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="date">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-globe text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Time Zone Converter</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Convert times between different time zones.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Time Zone Converter')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="date">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-calendar-alt text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Date Difference</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Calculate the difference between two dates.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Date Difference')">Use Tool</button>
+                </div>
+                
+                <!-- Image Tools -->
+                <div class="tool-card p-6 rounded-lg" data-categories="image">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-image text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Image Resizer</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Resize images to specific dimensions.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Image Resizer')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="image">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-crop text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Image Cropper</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Crop images to remove unwanted areas.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Image Cropper')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="image">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-adjust text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Grayscale Converter</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Convert color images to grayscale.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Grayscale Converter')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="image">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-water text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Watermark Adder</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Add text watermarks to your images.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Watermark Adder')">Use Tool</button>
+                </div>
+                
+                <!-- Design Tools -->
+                <div class="tool-card p-6 rounded-lg" data-categories="design">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-palette text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Color Picker</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Select and convert between color formats.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Color Picker')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="design">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-sliders-h text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Gradient Generator</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Create beautiful CSS gradients.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Gradient Generator')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="design">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-box-shadow text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Box Shadow Generator</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Create custom CSS box shadows.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Box Shadow Generator')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="design">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-border-style text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Border Radius Previewer</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Preview and generate border-radius CSS.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Border Radius Previewer')">Use Tool</button>
+                </div>
+                
+                <!-- Converters -->
+                <div class="tool-card p-6 rounded-lg" data-categories="converter">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-exchange-alt text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Base64 Converter</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Encode and decode Base64 strings.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Base64 Converter')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="converter">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-code text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Binary Converter</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Convert between binary, decimal, and hex.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Binary Converter')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="converter">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-thermometer-half text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Temperature Converter</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Convert between Celsius, Fahrenheit, and Kelvin.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Temperature Converter')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="converter">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-ruler text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Unit Converter</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Convert between different measurement units.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Unit Converter')">Use Tool</button>
+                </div>
+                
+                <!-- Developer Tools -->
+                <div class="tool-card p-6 rounded-lg" data-categories="developer">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-file-code text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">HTML Minifier</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Minify HTML code to reduce file size.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('HTML Minifier')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="developer">
+                    <div class="flex items-center mb-4">
+                        <i class="fab fa-css3-alt text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">CSS Minifier</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Minify CSS code for better performance.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('CSS Minifier')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="developer">
+                    <div class="flex items-center mb-4">
+                        <i class="fab fa-js text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">JavaScript Beautifier</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Format and beautify JavaScript code.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('JavaScript Beautifier')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="developer">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-random text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Regex Tester</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Test and debug regular expressions.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Regex Tester')">Use Tool</button>
+                </div>
+                
+                <!-- Security Tools -->
+                <div class="tool-card p-6 rounded-lg" data-categories="security">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-lock text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Password Generator</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Generate strong, secure passwords.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Password Generator')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="security">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-shield-alt text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Password Strength Checker</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Check the strength of your passwords.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Password Strength Checker')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="security">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-key text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">Caesar Cipher</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Encrypt and decrypt text with Caesar cipher.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('Caesar Cipher')">Use Tool</button>
+                </div>
+                
+                <div class="tool-card p-6 rounded-lg" data-categories="security">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-qrcode text-2xl mr-3 tool-icon"></i>
+                        <h3 class="text-xl font-semibold">QR Code Generator</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Create QR codes from text or URLs.</p>
+                    <button class="btn-gold px-4 py-2 rounded font-medium" onclick="redirectToTool('QR Code Generator')">Use Tool</button>
                 </div>
             </div>
         </section>
-
-        <!-- Image Tools -->
-        <section class="category">
-            <h2 class="category-title"><span>🖼️</span> Image Tools</h2>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <h2>Image Compressor</h2>
-                    <p>Reduce image file size while maintaining good visual quality.</p>
-                   
-                    <a href="image-compressor.html" class="tool-btn">Use Tool</a>
-                </div>
-                <div class="tool-card">
-                    <h2>Image Resizer</h2>
-                    <p>Change dimensions of your images to any size you need.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Image Resizer')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Convert to WebP</h2>
-                    <p>Convert JPG, PNG and other formats to modern WebP format.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Convert to WebP')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Background Remover</h2>
-                    <p>Automatically remove backgrounds from images with AI.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Background Remover')">Use Tool</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Audio Tools -->
-        <section class="category">
-            <h2 class="category-title"><span>🔊</span> Audio Tools</h2>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <h2>MP3 Cutter</h2>
-                    <p>Cut and trim your MP3 files online without quality loss.</p>
-                    <button class="tool-btn" onclick="redirectToTool('MP3 Cutter')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>MP3 to WAV</h2>
-                    <p>Convert MP3 audio files to WAV format with high quality.</p>
-                    <button class="tool-btn" onclick="redirectToTool('MP3 to WAV')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Audio Joiner</h2>
-                    <p>Merge multiple audio files into one seamless track.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Audio Joiner')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Noise Remover</h2>
-                    <p>Clean up audio recordings by removing background noise with AI.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Noise Remover')">Use Tool</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Video Tools -->
-        <section class="category">
-            <h2 class="category-title"><span>🎞️</span> Video Tools</h2>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <h2>Video Compressor</h2>
-                    <p>Reduce video file size without significant quality loss.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Video Compressor')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Trim Video</h2>
-                    <p>Cut and trim your videos to the perfect length.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Trim Video')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Video to GIF</h2>
-                    <p>Convert video clips to animated GIFs with custom settings.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Video to GIF')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Resize Video</h2>
-                    <p>Change video resolution and aspect ratio easily.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Resize Video')">Use Tool</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Text Tools -->
-        <section class="category">
-            <h2 class="category-title"><span>📝</span> Text Tools</h2>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <h2>Text Summarizer</h2>
-                    <p>Use AI to create concise summaries of long articles and documents.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Text Summarizer')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Text to Speech</h2>
-                    <p>Convert written text into natural sounding audio.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Text to Speech')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Grammar Checker</h2>
-                    <p>Check your writing for grammar, spelling, and punctuation errors.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Grammar Checker')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Word Counter</h2>
-                    <p>Count words, characters, sentences, and paragraphs in your text.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Word Counter')">Use Tool</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Conversion Tools -->
-        <section class="category">
-            <h2 class="category-title"><span>📦</span> Conversion Tools</h2>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <h2>Currency Converter</h2>
-                    <p>Convert between world currencies with up-to-date exchange rates.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Currency Converter')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Unit Converter</h2>
-                    <p>Convert between different units of length, weight, volume, and more.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Unit Converter')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Time Zone Converter</h2>
-                    <p>Convert times between different time zones worldwide.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Time Zone Converter')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>QR Code Generator</h2>
-                    <p>Create custom QR codes for URLs, text, contact info, and more.</p>
-                    <button class="tool-btn" onclick="redirectToTool('QR Code Generator')">Use Tool</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Developer Tools -->
-        <section class="category">
-            <h2 class="category-title"><span>🛠️</span> Developer Tools</h2>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <h2>JSON Formatter</h2>
-                    <p>Format and validate JSON data with syntax highlighting.</p>
-                    <button class="tool-btn" onclick="redirectToTool('JSON Formatter')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>XML to JSON</h2>
-                    <p>Convert XML data to JSON format quickly and accurately.</p>
-                    <button class="tool-btn" onclick="redirectToTool('XML to JSON')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Regex Tester</h2>
-                    <p>Test and debug regular expressions with real-time matching.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Regex Tester')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>UUID Generator</h2>
-                    <p>Generate random UUIDs (v4) for your development needs.</p>
-                    <button class="tool-btn" onclick="redirectToTool('UUID Generator')">Use Tool</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Miscellaneous Tools -->
-        <section class="category">
-            <h2 class="category-title"><span>📊</span> Miscellaneous Tools</h2>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <h2>Online Notepad</h2>
-                    <p>A simple, private notepad that works right in your browser.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Online Notepad')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>Password Generator</h2>
-                    <p>Create strong, secure passwords with customizable options.</p>
-                    <button class="tool-btn" onclick="redirectToTool('Password Generator')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>BMI Calculator</h2>
-                    <p>Calculate your Body Mass Index based on height and weight.</p>
-                    <button class="tool-btn" onclick="redirectToTool('BMI Calculator')">Use Tool</button>
-                </div>
-                <div class="tool-card">
-                    <h2>IP Address Checker</h2>
-                    <p>Find your public IP address and get location information.</p>
-                    <button class="tool-btn" onclick="redirectToTool('IP Address Checker')">Use Tool</button>
+        
+        <section class="bg-3A3D5B rounded-lg p-8 mb-12">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-4">Why Choose Tool Nest?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                    <div class="text-center">
+                        <div class="bg-FFD700 text-1E1E2F w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-bolt text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Fast & Efficient</h3>
+                        <p class="text-gray-300">Our tools process your data instantly without any delays.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-FFD700 text-1E1E2F w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-lock text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Privacy Focused</h3>
+                        <p class="text-gray-300">All processing happens in your browser - your data never leaves your device.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-FFD700 text-1E1E2F w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-mobile-alt text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Mobile Friendly</h3>
+                        <p class="text-gray-300">Use our tools on any device, anywhere, anytime.</p>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p class="footer-text">© 2023 ToolNest - All your online tools in one place</p>
+    <footer class="bg-2B2D42 py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="fas fa-tools text-2xl mr-3 text-gold-500"></i>
+                        <h2 class="text-2xl font-bold text-gold-500">Tool <span class="text-white">Nest</span></h2>
+                    </div>
+                    <p class="text-gray-300 mt-2">Your ultimate online toolkit since 2025</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-300 hover:text-gold-500 transition"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="#" class="text-gray-300 hover:text-gold-500 transition"><i class="fab fa-github text-xl"></i></a>
+                    <a href="#" class="text-gray-300 hover:text-gold-500 transition"><i class="fab fa-linkedin text-xl"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+                <p>&copy; 2025 Tool Nest. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
-        
-        // Check for saved theme preference or use preferred color scheme
-        const savedTheme = localStorage.getItem('theme') || 
-                         (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-        
-        // Apply the saved theme
-        if (savedTheme === 'light') {
-            body.classList.add('light-mode');
-            updateToggleButton('light');
+        function redirectToTool(toolName) {
+            alert(`Redirecting to ${toolName}`);
+            // In a real implementation, this would navigate to the tool page
+            // window.location.href = `/tools/${toolName.toLowerCase().replace(/\s+/g, '-')}`;
         }
         
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            const isLight = body.classList.contains('light-mode');
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            updateToggleButton(isLight ? 'light' : 'dark');
+        // Category filter functionality
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const tools = document.querySelectorAll('.tool-card');
+        const searchInput = document.getElementById('searchInput');
+        
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const category = button.dataset.category;
+                filterTools(category);
+            });
         });
         
-        function updateToggleButton(theme) {
-            const icon = themeToggle.querySelector('i');
-            const text = themeToggle.querySelector('span');
-            
-            if (theme === 'light') {
-                icon.className = 'fas fa-moon';
-                text.textContent = 'Dark Mode';
-            } else {
-                icon.className = 'fas fa-sun';
-                text.textContent = 'Light Mode';
-            }
+        function filterTools(category) {
+            tools.forEach(tool => {
+                if (category === 'all') {
+                    tool.classList.remove('hidden-category');
+                } else {
+                    const toolCategories = tool.dataset.categories.split(' ');
+                    if (toolCategories.includes(category)) {
+                        tool.classList.remove('hidden-category');
+                    } else {
+                        tool.classList.add('hidden-category');
+                    }
+                }
+            });
         }
         
-        // Tool redirection function
-        function redirectToTool(toolName) {
-            alert(`Redirecting to ${toolName} tool...`);
-            // In a real implementation, this would navigate to the actual tool page
-            // window.location.href = `/tools/${toolName.toLowerCase().replace(/ /g, '-')}`;
-        }
+        // Search functionality
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            tools.forEach(tool => {
+                const title = tool.querySelector('h3').textContent.toLowerCase();
+                const description = tool.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    tool.classList.remove('hidden-category');
+                } else {
+                    tool.classList.add('hidden-category');
+                }
+            });
+        });
+        
+        // Initialize with all tools visible
+        filterTools('all');
     </script>
 </body>
 </html>
